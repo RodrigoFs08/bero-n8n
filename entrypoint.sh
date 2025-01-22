@@ -22,5 +22,12 @@ export DB_POSTGRESDB_DATABASE=$N8N_DB_DATABASE
 export DB_POSTGRESDB_USER=$N8N_DB_USER
 export DB_POSTGRESDB_PASSWORD=$N8N_DB_PASSWORD
 
+# Configure PgBouncer (se necessário)
+if [ "$PGBOUNCER_ENABLED" = "true" ]; then
+    export DATABASE_URL="postgresql://$DB_POSTGRESDB_USER:$DB_POSTGRESDB_PASSWORD@127.0.0.1:6543/$DB_POSTGRESDB_DATABASE"
+    echo "PgBouncer está configurado e ativo."
+else
+    echo "PgBouncer não está ativado."
+fi
 # kickstart nodemation
 n8n
